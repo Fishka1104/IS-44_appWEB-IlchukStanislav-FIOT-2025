@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore</title>
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" >
 </head>
 <body>
-    <header>
-        <div>
-            <nav>
+    <header class="header">
+        <div class="header-top">
+            <nav class="nav">
                 <div>
-                <a href="index.html">TechStore</a>
+                <a class="logo" href="index.html">TechStore</a>
                 </div>
-                <ul>
-                    <li><a href="#">Магазин</a></li>
-                    <li><a href="#">Доставка</a></li>
-                    <li><a href="#">Обмін/Повернення</a></li>
-                    <li><a href="#">Контакти</a></li>
+                <ul class="nav-links">
+                    <li><a class="div-a" href="#">Магазин</a></li>
+                    <li><a class="div-a" href="#">Доставка</a></li>
+                    <li><a class="div-a" href="#">Обмін/Повернення</a></li>
+                    <li><a class="div-a" href="#">Контакти</a></li>
                 </ul>
             </nav>
-            <div>
-                <button>Каталог товарів</button>
-                <input type="text" placeholder="Пошук...">
-                <ul>
-                    <li><a href="#">Бажане</a></li>
-                    <li><a href="#">Порівняння</a></li>
-                    <li><a href="#">Кошик</a></li>
-                    <li><a href="#">Увійти</a></li>
+            <div class="header-bottom">
+                <button class="catalog-btn">Каталог товарів</button>
+                <input class="search-bar" type="text" placeholder="Пошук...">
+                <ul class="user-menu">
+                    <li><a class="lastdiv-a" href="#"><i class="fas fa-heart"></i><span>Бажане</span></a></li>
+                    <li><a class="lastdiv-a" href="#"><i class="fas fa-shopping-cart"></i><span>Кошик</span></a></li>
+                    <li><a class="lastdiv-a" href="#"><i class="fas fa-balance-scale"></i><span>Порівняння</span></a></li>
+                    <li><a class="lastdiv-a" href="#"><i class="fas fa-user"></i><span>Увійти</span></a></li>
                 </ul>
             </div>
         </div>
@@ -228,7 +230,7 @@
 
     <footer class="footer">
         <div class="footer-container">
-
+            
                 <div class="footer-about">
                     <h2>TechStore</h2>
                     <p>Ваш надійний інтернет-магазин техніки та електроніки. 
