@@ -6,7 +6,7 @@
  
  header{
     font-family: Arial, sans-serif;
-    border-bottom: 5px solid #ddd;
+    border-bottom: 10px solid #ffffff;
 }
 
 header nav{
@@ -99,21 +99,66 @@ header nav{
     gap: 15px;
 }
 
-header button {
-    background: #fff;
+header button.catalog-btn {
+    position: relative; 
+    z-index: 1; 
+    overflow: hidden; 
+    
+    background: linear-gradient(90deg, #4c51bf, #a3bffa);
     border: none;
-    padding: 10px 15px;
-    font-weight: bold;
+    padding: 12px 20px;
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 12px rgba(76, 81, 191, 0.3);
 }
 
-header input[type="text"] {
+header button.catalog-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #5a5fff, #b3c0ff);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease; 
+}
+
+header button.catalog-btn:hover::before {
+    opacity: 1; 
+}
+
+header button.catalog-btn:hover {
+    transform: scale(1.08); 
+    box-shadow: 0 6px 15px rgba(76, 81, 191, 0.5);
+}
+
+header button.catalog-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(76, 81, 191, 0.2);
+}
+
+header input[type="text"].search-bar {
     flex-grow: 1;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 3px solid #a2a8af;
     font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+    background: #f9fafb;
+    color: #2d3748;
+}
+
+header input[type="text"].search-bar:focus {
+    border-color: #2a2e8e; 
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(76, 81, 191, 0.2);
 }
 
 .user-menu {
@@ -177,13 +222,83 @@ header input[type="text"] {
 .lastdiv-a:active {
     transform: scale(0.92);
 }
+
+.main-section {
+    background: #efefef; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.content-container {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-section {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.carousel-section {
+    flex: 3;
+    min-width: 600px;
+}
+
+ul.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+li.menu-item {
+    width: 100%;
+}
+
+li.menu-item a.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #4a5568;
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+li.menu-item a.menu-link:hover {
+    color: #2b6cb0;
+    background: #edf2f7;
+    transform: translateX(5px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+li.menu-item a.menu-link i {
+    font-size: 18px;
+    color: #2a5fba;
+    transition: color 0.3s ease;
+}
+
+li.menu-item a.menu-link:hover i {
+    color: #2b6cb0;
+}
+
 .carousel {
     position: relative;
-    max-width: 1000px;
-    margin: 30px auto;
+    width: 100%;
     overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-container {
@@ -205,21 +320,38 @@ header input[type="text"] {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
-    border: none;
-    color: white;
+    border: 2px solid #4a90e2; 
+    background: transparent; 
+    border-radius: 50%;
+    color: #4a90e2; 
     font-size: 2rem;
     cursor: pointer;
     padding: 10px;
-    border-radius: 50%;
+    transition: all 0.4s ease;
+    z-index: 10;
 }
 
 .prev { left: 10px; }
 .next { right: 10px; }
 
 .prev:hover, .next:hover {
-    background: rgba(0,0,0,0.8);
+    transform: translateY(-50%) scale(1.2);
+    border-color: #5a5fff; 
+    color: #5a5fff;
+    box-shadow: 0 5px 15px rgba(90, 95, 255, 0.4);
 }
+
+.prev:active, .next:active {
+    transform: translateY(-50%) scale(0.9); 
+    border-color: #2b6cb0; 
+    color: #2b6cb0;
+}
+
+
+
+
+
+
 
 .products {
     margin: 40px auto;

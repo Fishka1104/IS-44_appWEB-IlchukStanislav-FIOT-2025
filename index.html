@@ -6,8 +6,10 @@
     <title>TechStore</title>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <link rel="stylesheet" href="img">
 </head>
+
 <body>
     <header class="header">
         <div class="header-top">
@@ -34,66 +36,72 @@
             </div>
         </div>
     </header>
+
     <main>
-        <section>
-            <div>
-                <ul>
-                    <li><a href="#">📱 Смартфони та телефони</a></li>
-                    <li><a href="#">📺 Телевізори і аудіотехніка</a></li>
-                    <li><a href="#">💻 Ноутбуки, ПК і Планшети</a></li>
-                    <li><a href="#">🍳 Техніка для кухні</a></li>
-                    <li><a href="#">🏠 Техніка для дому</a></li>
-                    <li><a href="#">🎮 Ігрова зона</a></li>
-                    <li><a href="#">⌚ Гаджети та аксесуари</a></li>
-                    <li><a href="#">🍲 Посуд</a></li>
-                    <li><a href="#">📷 Фото і відео</a></li>
-                    <li><a href="#">💄 Краса та здоров'я</a></li>
-                    <li><a href="#">🚗 Авто і інструменти</a></li>
-                    <li><a href="#">🎒 Спорт і туризм</a></li>
-                    <li><a href="#">🌿 Товари для дому та саду</a></li>
-                    <li><a href="#">🧸 Товари для дітей</a></li>
-                </ul>
+        <section class="main-section">
+            <div class="content-container">
+                <div class="menu-section">
+                    <ul class="menu-list">
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-mobile-alt"></i><span>Смартфони та телефони</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-tv"></i><span>Телевізори і аудіотехніка</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-laptop"></i><span>Ноутбуки, ПК і Планшети</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-utensils"></i><span>Техніка для кухні</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-home"></i><span>Техніка для дому</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-gamepad"></i><span>Ігрова зона</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-utensil-spoon"></i><span>Посуд</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-camera"></i><span>Фото і відео</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-spa"></i><span>Краса та здоров'я</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-car"></i><span>Авто і інструменти</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-hiking"></i><span>Спорт і туризм</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-leaf"></i><span>Товари для дому та саду</span></a></li>
+                        <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-baby"></i><span>Товари для дітей</span></a></li>
+                    </ul>
+                </div>
+                <div class="carousel-section">
+                    <div class="carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="img\iphone-17-2 (3).png" alt="iPhone 17">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img\second.png" alt="iPhone 17">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/iphone17-3.png" alt="iPhone 17">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/iphone17-4.png" alt="iPhone 17">
+                            </div>
+                        </div>
+                        <button class="prev">&#10094;</button>
+                        <button class="next">&#10095;</button>
+                    </div>
+                </div>
             </div>
         </section>
-
-        <section class="carousel">
-            <div class="carousel-container">
-                <div class="carousel-slide">
-                 <img src="img/iphone17-1.png" alt="iPhone 17">
+        
+        <section class="products">
+            <h2>Смартфони</h2>
+            <div class="product-carousel">
+                <div class="product-card">
+                    <img src="img/smartphone1.png" alt="iPhone 17">
+                    <h3>iPhone 17</h3>
+                    <p class="price">35 999 грн</p>
+                    <button>Купити</button>
                 </div>
-                <div class="carousel-slide">
-                    <img src="img/iphone17-2.png" alt="iPhone 17 Colors">
+                <div class="product-card">
+                    <img src="img/smartphone2.png" alt="Samsung Galaxy">
+                    <h3>Samsung Galaxy S24</h3>
+                    <p class="price">29 499 грн</p>
+                    <button>Купити</button>
                 </div>
-                <div class="carousel-slide">
-                    <img src="img/iphone17-3.png" alt="iPhone 17 Camera">
+                <div class="product-card">
+                    <img src="img/smartphone3.png" alt="Xiaomi">
+                    <h3>Xiaomi Redmi Note 12</h3>
+                    <p class="price">6 599 грн</p>
+                    <button>Купити</button>
                 </div>
             </div>
-            <button class="prev">&#10094;</button>
-            <button class="next">&#10095;</button>
-        </section>
-
-            <section class="products">
-                <h2>Смартфони</h2>
-                <div class="product-carousel">
-                    <div class="product-card">
-                        <img src="img/smartphone1.png" alt="iPhone 17">
-                        <h3>iPhone 17</h3>
-                        <p class="price">35 999 грн</p>
-                        <button>Купити</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/smartphone2.png" alt="Samsung Galaxy">
-                        <h3>Samsung Galaxy S24</h3>
-                        <p class="price">29 499 грн</p>
-                        <button>Купити</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="img/smartphone3.png" alt="Xiaomi">
-                        <h3>Xiaomi Redmi Note 12</h3>
-                        <p class="price">6 599 грн</p>
-                        <button>Купити</button>
-                    </div>
-                </div>
         </section>
 
         <section class="products">
@@ -247,14 +255,12 @@
                     </ul>
                 </div>
 
-
                 <div class="footer-contacts">
                     <h3>Контакти</h3>
                     <p><b>Телефон:</b> +38 (050) 123-45-67</p>
                     <p><b>Email:</b> support@techstore.ua</p>
                     <p><b>Адреса:</b> м. Київ, просп. Перемоги, 25</p>
                 </div>
-
 
                 <div class="footer-social">
                     <h3>Ми у соцмережах</h3>
@@ -267,10 +273,12 @@
                 </div>
         </div>
 
-
             <div class="footer-bottom">
                 <p>© 2025 TechStore. Всі права захищені.</p>
             </div>
     </footer>
+
+    <script src="JS/carousel.js"></script>
+
 </body>
 </html>
