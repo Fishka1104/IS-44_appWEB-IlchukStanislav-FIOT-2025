@@ -26,3 +26,27 @@ prevButton.addEventListener('click', () => {
 window.addEventListener('resize', updateCarousel);
 
 updateCarousel();
+
+
+
+
+
+document.querySelectorAll('.product-carousel').forEach(carousel => {
+        const prevBtn = carousel.nextElementSibling.querySelector('.prev-btn');
+        const nextBtn = carousel.nextElementSibling.querySelector('.next-btn');
+        const scrollAmount = 270;
+
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+    });
