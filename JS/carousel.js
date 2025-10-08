@@ -14,7 +14,7 @@ nextButton.addEventListener('click', () => {
         currentSlide++;
         updateCarousel();
     }
-});
+}); 
 
 prevButton.addEventListener('click', () => {
     if (currentSlide > 0) {
