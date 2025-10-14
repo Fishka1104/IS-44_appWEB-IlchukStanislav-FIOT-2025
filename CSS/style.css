@@ -1,15 +1,15 @@
-
- body {
+body {
     justify-content: center;
     align-items: center;
-}
- 
- header{
+    margin: 0;
     font-family: Arial, sans-serif;
+}
+
+header {
     border-bottom: 10px solid #ffffff;
 }
 
-header nav{
+header nav {
     display: flex;
     justify-content: space-between;
     padding: 8px 10px;
@@ -32,7 +32,7 @@ header nav{
 
 .logo:hover {
     transform: translateY(-3px);
-    color: #00c4cc; 
+    color: #00c4cc;
 }
 
 @keyframes pulse {
@@ -61,7 +61,6 @@ header nav{
     transition: all 0.4s ease;
     display: inline-block;
     position: relative;
-
 }
 
 .div-a::after {
@@ -94,16 +93,15 @@ header nav{
 .header-bottom {
     display: flex;
     align-items: center;
-    background: #406090; 
+    background: #406090;
     padding: 10px 20px;
     gap: 15px;
 }
 
 header button.catalog-btn {
-    position: relative; 
-    z-index: 1; 
-    overflow: hidden; 
-    
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
     background: linear-gradient(90deg, #4c51bf, #a3bffa);
     border: none;
     padding: 12px 20px;
@@ -126,15 +124,15 @@ header button.catalog-btn::before {
     background: linear-gradient(90deg, #5a5fff, #b3c0ff);
     opacity: 0;
     z-index: -1;
-    transition: opacity 0.4s ease; 
+    transition: opacity 0.4s ease;
 }
 
 header button.catalog-btn:hover::before {
-    opacity: 1; 
+    opacity: 1;
 }
 
 header button.catalog-btn:hover {
-    transform: scale(1.08); 
+    transform: scale(1.08);
     box-shadow: 0 6px 15px rgba(76, 81, 191, 0.5);
 }
 
@@ -156,7 +154,7 @@ header input[type="text"].search-bar {
 }
 
 header input[type="text"].search-bar:focus {
-    border-color: #2a2e8e; 
+    border-color: #2a2e8e;
     background: #ffffff;
     box-shadow: 0 0 8px rgba(76, 81, 191, 0.2);
 }
@@ -206,17 +204,11 @@ header input[type="text"].search-bar:focus {
 
 .lastdiv-a:hover i {
     color: #ffee00;
-    transform: scale(1.2); 
-    transition: transform 0.5s ease; 
+    transform: scale(1.2);
 }
 
 .lastdiv-a:hover span {
     color: #ffffff;
-}
-
-.lastdiv-a:hover::before {
-    width: 150%;
-    height: 150%;
 }
 
 .lastdiv-a:active {
@@ -229,7 +221,7 @@ header input[type="text"].search-bar:focus {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .content-container {
@@ -320,10 +312,10 @@ li.menu-item a.menu-link:hover i {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    border: 2px solid #4a90e2; 
-    background: transparent; 
+    border: 2px solid #4a90e2;
+    background: transparent;
     border-radius: 50%;
-    color: #4a90e2; 
+    color: #4a90e2;
     font-size: 2rem;
     cursor: pointer;
     padding: 10px;
@@ -336,21 +328,16 @@ li.menu-item a.menu-link:hover i {
 
 .prev:hover, .next:hover {
     transform: translateY(-50%) scale(1.2);
-    border-color: #5a5fff; 
+    border-color: #5a5fff;
     color: #5a5fff;
     box-shadow: 0 5px 15px rgba(90, 95, 255, 0.4);
 }
 
 .prev:active, .next:active {
-    transform: translateY(-50%) scale(0.9); 
-    border-color: #2b6cb0; 
+    transform: translateY(-50%) scale(0.9);
+    border-color: #2b6cb0;
     color: #2b6cb0;
 }
-
-
-
-  
-
 
 .products {
     background: #efefef;
@@ -358,7 +345,7 @@ li.menu-item a.menu-link:hover i {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .section-title {
@@ -378,7 +365,7 @@ li.menu-item a.menu-link:hover i {
     position: absolute;
     bottom: -5px;
     left: 0;
-    width: 0px;
+    width: 50px;
     height: 3px;
     background: #4a90e2;
     transition: width 0.3s ease;
@@ -393,15 +380,14 @@ li.menu-item a.menu-link:hover i {
     gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 10px;
     scroll-behavior: smooth;
-
+    padding-bottom: 10px;
 }
 
 .product-carousel::-webkit-scrollbar {
-    width: 8px; 
-    height: 8px; 
-    background: transparent; 
+    width: 8px;
+    height: 8px;
+    background: transparent;
 }
 
 .product-carousel::-webkit-scrollbar-track {
@@ -410,17 +396,17 @@ li.menu-item a.menu-link:hover i {
 }
 
 .product-carousel::-webkit-scrollbar-thumb {
-    background: #4a90e2; 
+    background: #4a90e2;
     border-radius: 10px;
-    transition: background 0.3s ease; 
+    transition: background 0.3s ease;
 }
 
 .product-carousel::-webkit-scrollbar-thumb:hover {
-    background: #5a5fff; 
+    background: #5a5fff;
 }
 
 .product-carousel::-webkit-scrollbar-button {
-    display: none; 
+    display: none;
 }
 
 .product-card {
@@ -440,7 +426,7 @@ li.menu-item a.menu-link:hover i {
     top: 10px;
     right: 10px;
     display: flex;
-    gap: 5px;
+    margin-bottom: 10px;
 }
 
 .card-icons i {
@@ -565,16 +551,12 @@ li.menu-item a.menu-link:hover i {
     color: #2b6cb0;
 }
 
-
-
-
-
 .advantages {
     text-align: center;
     padding: 50px 20px;
-    background: linear-gradient(90deg, #7b96f8, #4237aa); 
+    background: linear-gradient(90deg, #7b96f8, #4237aa);
     color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .advantages h2 {
@@ -595,25 +577,25 @@ li.menu-item a.menu-link:hover i {
 
 .adv-item {
     padding: 20px;
-    background: rgba(255, 255, 255, 0.175); 
+    background: rgba(255, 255, 255, 0.175);
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .adv-item:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .adv-item i {
-    font-size: 40px; 
-    color: #62c0fe; 
+    font-size: 40px;
+    color: #62c0fe;
     margin-bottom: 15px;
     transition: color 0.3s ease;
 }
 
 .adv-item i:hover {
-    color: #34377c; 
+    color: #34377c;
 }
 
 .adv-item h3 {
@@ -624,11 +606,8 @@ li.menu-item a.menu-link:hover i {
 
 .adv-item p {
     font-size: 14px;
-    color: #e2e8f0; 
+    color: #e2e8f0;
 }
-
-
-
 
 .about {
     background: #f3f4f6;
@@ -713,7 +692,7 @@ li.menu-item a.menu-link:hover i {
     color: #fff;
     padding: 50px 20px 20px;
     margin-top: 50px;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .footer-container {
@@ -735,7 +714,7 @@ li.menu-item a.menu-link:hover i {
 .footer-about p {
     font-size: 14px;
     line-height: 1.6;
-    color: #bbb; 
+    color: #bbb;
 }
 
 .footer-links ul {
@@ -754,7 +733,7 @@ li.menu-item a.menu-link:hover i {
 }
 
 .footer-links a:hover {
-    color: #4a90e2; 
+    color: #4a90e2;
 }
 
 .footer-contacts p {
@@ -764,7 +743,7 @@ li.menu-item a.menu-link:hover i {
 }
 
 .footer-contacts b {
-    color: #fff; 
+    color: #fff;
 }
 
 .footer-social .social-icons {
@@ -773,15 +752,14 @@ li.menu-item a.menu-link:hover i {
 }
 
 .footer-social i {
-    margin-right: 32px;
-    font-size: 24px; 
-    color: #bbb; 
+    font-size: 24px;
+    color: #bbb;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-social i:hover {
-    color: #4a90e2; 
-    transform: scale(1.2); 
+    color: #4a90e2;
+    transform: scale(1.2);
 }
 
 .footer-bottom {
@@ -791,4 +769,346 @@ li.menu-item a.menu-link:hover i {
     margin-top: 30px;
     font-size: 14px;
     color: #aaa;
+}
+
+/* Media Queries для адаптивності */
+
+/* Мобільні пристрої (до 600px) */
+@media screen and (max-width: 600px) {
+    header nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .header-bottom {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header button.catalog-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    header input[type="text"].search-bar {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .user-menu {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .lastdiv-a {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .lastdiv-a i {
+        font-size: 16px;
+    }
+
+    .content-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .menu-section, .carousel-section {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .carousel {
+        border-radius: 8px;
+    }
+
+    .prev, .next {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+
+    .products {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .product-carousel {
+        gap: 15px;
+    }
+
+    .product-card {
+        flex: 0 0 200px;
+        padding: 10px;
+    }
+
+    .product-card img {
+        height: 120px;
+    }
+
+    .product-card h3 {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .review-btn, .info-btn {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .carousel-controls {
+        gap: 5px;
+    }
+
+    .prev-btn, .next-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .advantages {
+        padding: 30px 10px;
+    }
+
+    .advantages h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .adv-item {
+        padding: 15px;
+    }
+
+    .adv-item i {
+        font-size: 32px;
+    }
+
+    .adv-item h3 {
+        font-size: 16px;
+    }
+
+    .adv-item p {
+        font-size: 12px;
+    }
+
+    .about {
+        padding: 30px 10px;
+    }
+
+    .about-box {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .about h2 {
+        font-size: 22px;
+    }
+
+    .about h3 {
+        font-size: 18px;
+    }
+
+    .about p, .about li {
+        font-size: 14px;
+    }
+
+    .footer {
+        padding: 30px 10px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .footer h2, .footer h3 {
+        font-size: 18px;
+    }
+
+    .footer-about p, .footer-contacts p, .footer-links a {
+        font-size: 12px;
+    }
+
+    .footer-social i {
+        font-size: 20px;
+    }
+}
+
+/* Планшети (600px–900px) */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    header nav {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .div-a {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .header-bottom {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    header button.catalog-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    header input[type="text"].search-bar {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .user-menu {
+        gap: 10px;
+    }
+
+    .lastdiv-a {
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+
+    .lastdiv-a i {
+        font-size: 18px;
+    }
+
+    .content-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .menu-section, .carousel-section {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .products {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .product-carousel {
+        gap: 15px;
+    }
+
+    .product-card {
+        flex: 0 0 220px;
+        padding: 12px;
+    }
+
+    .product-card img {
+        height: 130px;
+    }
+
+    .product-card h3 {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .adv-item {
+        padding: 15px;
+    }
+
+    .adv-item i {
+        font-size: 36px;
+    }
+
+    .adv-item h3 {
+        font-size: 16px;
+    }
+
+    .about-box {
+        padding: 30px;
+    }
+
+    .about h2 {
+        font-size: 24px;
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .footer h2, .footer h3 {
+        font-size: 20px;
+    }
+}
+
+/* Великі екрани (понад 900px) */
+@media screen and (min-width: 901px) {
+    .content-container {
+        flex-direction: row;
+    }
+
+    .menu-section {
+        flex: 1;
+        min-width: 250px;
+        max-width: 300px;
+    }
+
+    .carousel-section {
+        flex: 3;
+        min-width: 600px;
+    }
+
+    .card-icons i {
+        gap: 15px;
+    }
+
+    .advantages-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
