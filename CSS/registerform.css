@@ -1,0 +1,130 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #161616;
+}
+
+.login-form {
+    max-width: 320px;
+    width: 100%;
+    padding: 40px;
+    background-color: #ffffffe6;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px #0000001a;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.form-heading {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group .label {
+    position: absolute;
+    top: -16px;
+    left: 12px;
+    font-size: 12px;
+    color: #3b82f6;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.input-group input {
+    width: 275px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 10px #588fbc66;
+}
+
+.input-group input:focus + .label {
+    top: -20px;
+    font-size: 11px;
+    color: #3b82f6;
+    opacity: 1;
+}
+
+.forgot-password {
+    font-size: 14px;
+    text-align: right;
+}
+
+.forgot-password a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #456fa5;
+}
+
+.submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #58bc82;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit:hover {
+    background-color: #455aa5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px #588fbc4d;
+}
+
+.signup-link {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.signup-link a {
+    color: #586ebc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #455fa5;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
