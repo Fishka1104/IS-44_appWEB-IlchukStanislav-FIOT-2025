@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід та Реєстрація</title>
+    <link rel="stylesheet" href="CSS/registerform.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <link rel="stylesheet" href="img">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <button class="tab-btn active" data-form="login">Вхід</button>
+            <button class="tab-btn" data-form="signup">Реєстрація</button>
+        </div>
+
+        <div class="form-container login-container active">
+            <form class="auth-form-card">
+                <div class="form-heading">Вхід в акаунт</div>
+                <div class="input-group">
+                    <input required placeholder="Введіть ваш email" name="email" id="login-email" type="email"/>
+                    <label class="label" for="login-email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input required placeholder="Введіть ваш пароль" name="password" id="login-password" type="password"/>
+                    <label class="label" for="login-password">Пароль</label>
+                </div>
+                <button class="submit" type="submit">Увійти</button>
+            </form>
+        </div>
+
+        <div class="form-container signup-container">
+            <form class="auth-form-card">
+                <div class="form-heading">Створити акаунт</div>
+                <div class="input-group">
+                    <input required placeholder="Введіть ваше ім'я" name="name" id="signup-name" type="text"/>
+                    <label class="label" for="signup-name">Ім'я</label>
+                </div>
+                <div class="input-group">
+                    <input required placeholder="Введіть ваш email" name="email" id="signup-email" type="email"/>
+                    <label class="label" for="signup-email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input required placeholder="Створіть пароль" name="password" id="signup-password" type="password"/>
+                    <label class="label" for="signup-password">Пароль</label>
+                </div>
+                 <div class="input-group">
+                    <input required placeholder="Підтвердіть пароль" name="confirm-password" id="confirm-password" type="password"/>
+                    <label class="label" for="confirm-password">Підтвердіть пароль</label>
+                </div>
+                <button class="submit" type="submit">Зареєструватися</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const formContainers = document.querySelectorAll('.form-container');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+
+                const formName = button.dataset.form;
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                formContainers.forEach(container => {
+                    if (container.classList.contains(`${formName}-container`)) {
+                        container.classList.add('active');
+                    } else {
+                        container.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1112,3 +1112,203 @@ li.menu-item a.menu-link:hover i {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+/* profile */
+.cabinet-container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #efefef; 
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cabinet-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #203c6b; 
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cabinet-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.cabinet-nav {
+    flex: 0 0 250px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.cabinet-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cabinet-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #4a5568; 
+    font-size: 16px; 
+    font-weight: 600;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.cabinet-nav li a i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    color: #2a5fba; 
+    transition: color 0.3s ease;
+}
+
+.cabinet-nav li a:hover {
+    background: #edf2f7; 
+    color: #2b6cb0;
+    border-color: #e2e8f0;
+}
+
+.cabinet-nav li a:hover i {
+    color: #2b6cb0;
+}
+
+.cabinet-nav li.active a {
+    background: #eef2ff;
+    color: #4c51bf;
+    font-weight: 700;
+    border-color: #c7d2fe;
+}
+
+.cabinet-nav li.active a i {
+    color: #4c51bf;
+}
+
+.cabinet-content {
+    flex-grow: 1;
+}
+
+.content-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 700;
+}
+
+.profile-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-item label {
+    font-size: 14px;
+    color: #718096; 
+    margin-bottom: 5px;
+}
+
+.detail-item .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748; 
+    min-height: 24px; 
+}
+
+.detail-item .value:empty::after {
+    content: 'Не вказано';
+    color: #a0aec0; 
+    font-style: italic;
+    font-weight: 500;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    color: #4a5568;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+    background: #edf2f7;
+    border-color: #4a90e2; 
+    color: #2b6cb0;
+}
+
+/* Адаптивність */
+/* Планшети (600px–900px) */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .cabinet-layout {
+        flex-direction: column;
+    }
+    .cabinet-nav {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    .profile-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+/* Мобільні пристрої (до 600px) */
+@media screen and (max-width: 600px) {
+    .cabinet-layout {
+        flex-direction: column;
+    }
+    .cabinet-nav {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    .profile-grid {
+        grid-template-columns: 1fr; 
+    }
+    .cabinet-container {
+        padding: 10px;
+    }
+    .profile-card {
+        padding: 20px 15px;
+    }
+    .cabinet-title, .content-title {
+        font-size: 22px;
+    }
+}
+
+
