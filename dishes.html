@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Посуд | TechStore</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/category-extra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+<header class="header">
+  <div class="header-top">
+    <nav class="nav">
+      <div><a class="logo" href="index.html">TechStore</a></div>
+      <ul class="nav-links">
+        <li><a class="div-a" href="techStore.html">Магазин</a></li>
+        <li><a class="div-a" href="delivery.html">Доставка</a></li>
+        <li><a class="div-a" href="returns.html">Обмін/Повернення</a></li>
+        <li><a class="div-a" href="contacts.html">Контакти</a></li>
+      </ul>
+    </nav>
+    <div class="header-bottom">
+      
+    <div class="catalog-wrapper">
+        <button class="catalog-btn" id="catalog-toggle">Каталог товарів</button>
+        <div class="catalog-dropdown" id="catalog-dropdown">
+            <ul class="menu-list">
+        <li class="menu-item">
+            <a href="smartphones.html" class="menu-link"><i class="fas fa-mobile-alt"></i><span>Смартфони та телефони</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="tv.html" class="menu-link"><i class="fas fa-tv"></i><span>Телевізори і аудіотехніка</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="notebooks-cat.html" class="menu-link"><i class="fas fa-laptop"></i><span>Ноутбуки, ПК і Планшети</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="kitchen.html" class="menu-link"><i class="fas fa-utensils"></i><span>Техніка для кухні</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="home-tech.html" class="menu-link"><i class="fas fa-home"></i><span>Техніка для дому</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="gaming.html" class="menu-link"><i class="fas fa-gamepad"></i><span>Ігрова зона</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="dishes.html" class="menu-link"><i class="fas fa-utensil-spoon"></i><span>Посуд</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="photo-video.html" class="menu-link"><i class="fas fa-camera"></i><span>Фото і відео</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="beauty.html" class="menu-link"><i class="fas fa-spa"></i><span>Краса та здоров'я</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="auto-tools.html" class="menu-link"><i class="fas fa-car"></i><span>Авто і інструменти</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="sport.html" class="menu-link"><i class="fas fa-hiking"></i><span>Спорт і туризм</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="home-garden.html" class="menu-link"><i class="fas fa-leaf"></i><span>Товари для дому та саду</span></a>
+        </li>
+
+        <li class="menu-item">
+            <a href="kids.html" class="menu-link"><i class="fas fa-baby"></i><span>Товари для дітей</span></a>
+        </li>
+            </ul>
+        </div>
+    </div>
+    
+      <input class="search-bar" type="text" placeholder="Пошук...">
+      <ul class="user-menu">
+        <li><a class="lastdiv-a" href="#"><i class="fas fa-heart"></i><span>Бажане</span></a></li>
+        <li><a class="lastdiv-a" href="#"><i class="fas fa-shopping-cart"></i><span>Кошик</span></a></li>
+        <li><a class="lastdiv-a" href="#"><i class="fas fa-balance-scale"></i><span>Порівняння</span></a></li>
+        <li><a class="lastdiv-a" href="singInForm.html"><i class="fas fa-user"></i><span>Мій Профіль</span></a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="category-page" data-category="dishes">
+  <div class="category-header">
+    <div class="breadcrumbs">
+      <a href="index.html">Головна</a>
+      <span>/</span>
+      <a href="techStore.html">Каталог</a>
+      <span>/</span>
+      <span>Посуд</span>
+    </div>
+    <h1 class="category-title">Посуд</h1>
+    <p class="category-subtitle">Сковорідки, каструлі та столовий посуд.</p>
+    <div class="category-toolbar">
+      <div class="toolbar-left"><span id="product-count">Товарів: 0</span></div>
+      <div class="toolbar-right">
+        <label for="sort-select">Сортування:</label>
+        <select id="sort-select">
+          <option value="default">За замовчуванням</option>
+          <option value="price-asc">Ціна: зростання</option>
+          <option value="price-desc">Ціна: спадання</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-layout">
+    <aside class="filters-panel">
+      <h2 class="filters-title"><i class="fas fa-filter"></i> Фільтри</h2>
+      <div class="filters-group">
+        <h3 class="filter-subtitle">Бренд</h3>
+        <label><input type="checkbox" name="brand" value="Tefal"> Tefal</label>
+<label><input type="checkbox" name="brand" value="BergHOFF"> BergHOFF</label>
+<label><input type="checkbox" name="brand" value="Pyrex"> Pyrex</label>
+<label><input type="checkbox" name="brand" value="Luminarc"> Luminarc</label>
+<label><input type="checkbox" name="brand" value="Villeroy &amp; Boch"> Villeroy &amp; Boch</label>
+      </div>
+      <div class="filters-group">
+        <h3 class="filter-subtitle">Тип</h3>
+        <label><input type="checkbox" name="type" value="pan"> Сковорідки</label>
+<label><input type="checkbox" name="type" value="pot"> Каструлі</label>
+<label><input type="checkbox" name="type" value="tableware"> Столовий посуд</label>
+      </div>
+      <div class="filters-group">
+        <h3 class="filter-subtitle">Ціна, грн</h3>
+        <div class="price-filter-row">
+          <input type="number" id="min-price" placeholder="Від">
+          <input type="number" id="max-price" placeholder="До">
+        </div>
+        <button id="apply-filters" class="filter-btn">Застосувати</button>
+        <button id="reset-filters" class="filter-btn secondary">Скинути</button>
+      </div>
+    </aside>
+
+    <section class="category-content">
+      <!-- Admin panel (CRUD) -->
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <h2><i class="fas fa-gears"></i> Адмін-панель (CRUD)</h2>
+          <span class="admin-hint">* Поки що фронтенд (localStorage). Для продакшну підв'яжемо бекенд.</span>
+        </div>
+        <form id="product-form" class="admin-form">
+          <input type="hidden" id="product-id">
+          <div class="admin-row">
+            <div class="admin-field">
+              <label for="product-name">Назва</label>
+              <input type="text" id="product-name" required placeholder="Назва товару">
+            </div>
+            <div class="admin-field">
+              <label for="product-brand">Бренд</label>
+              <input type="text" id="product-brand" required placeholder="Бренд">
+            </div>
+          </div>
+          <div class="admin-row">
+            <div class="admin-field">
+              <label for="product-price">Ціна, грн</label>
+              <input type="number" id="product-price" required min="0">
+            </div>
+            <div class="admin-field">
+              <label for="product-type">Тип</label>
+              <input type="text" id="product-type" required placeholder="Тип / категорія в межах розділу">
+            </div>
+          </div>
+          <div class="admin-row">
+            <div class="admin-field">
+              <label for="product-image">URL зображення</label>
+              <input type="text" id="product-image" placeholder="https://... або img/...">
+            </div>
+            <div class="admin-field">
+              <label for="product-desc">Опис (коротко)</label>
+              <input type="text" id="product-desc" placeholder="Короткий опис">
+            </div>
+          </div>
+          <div class="admin-actions-row">
+            <button type="submit" class="filter-btn" id="save-product-btn">Додати товар</button>
+            <button type="button" class="filter-btn secondary" id="cancel-edit-btn" style="display:none;">Скасувати редагування</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="products-container" class="category-grid"></div>
+    </section>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h2>TechStore</h2>
+      <p>Ваш надійний інтернет-магазин техніки та електроніки.
+         Ми пропонуємо тільки якісні товари, вигідні ціни та швидку доставку по всій Україні.</p>
+    </div>
+    <div class="footer-links">
+      <h3>Корисні посилання</h3>
+      <ul>
+        <li><a href="techStore.html">Каталог</a></li>
+        <li><a href="delivery.html">Доставка та оплата</a></li>
+        <li><a href="returns.html">Обмін/Повернення</a></li>
+        <li><a href="contacts.html">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-contacts">
+      <h3>Контакти</h3>
+      <p><b>Телефон:</b> +38 (050) 123-45-67</p>
+      <p><b>Email:</b> support@techstore.ua</p>
+      <p><b>Адреса:</b> м. Київ, просп. Перемоги, 25</p>
+    </div>
+    <div class="footer-social">
+      <h3>Ми у соцмережах</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 TechStore. Всі права захищені.</p></div>
+</footer>
+
+<script src="JS/main.js"></script>
+<script src="JS/catalog-crud.js"></script>
+</body>
+</html>

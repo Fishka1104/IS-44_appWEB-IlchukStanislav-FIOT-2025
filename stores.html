@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазини TechStore</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+
+<body>
+<header class="header">
+    <div class="header-top">
+        <nav class="nav">
+            <div>
+                <a class="logo" href="index.html">TechStore</a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="div-a" href="stores.html">Магазин</a></li>
+                <li><a class="div-a" href="delivery.html">Доставка</a></li>
+                <li><a class="div-a" href="returns.html">Обмін/Повернення</a></li>
+                <li><a class="div-a" href="contacts.html">Контакти</a></li>
+            </ul>
+        </nav>
+        <div class="header-bottom">
+            <button class="catalog-btn">Каталог товарів</button>
+            <input class="search-bar" type="text" placeholder="Пошук...">
+            <ul class="user-menu">
+                <li><a class="lastdiv-a" href="#"><i class="fas fa-heart"></i><span>Бажане</span></a></li>
+                <li><a class="lastdiv-a" href="#"><i class="fas fa-shopping-cart"></i><span>Кошик</span></a></li>
+                <li><a class="lastdiv-a" href="#"><i class="fas fa-balance-scale"></i><span>Порівняння</span></a></li>
+                <li><a class="lastdiv-a" href="singInForm.html"><i class="fas fa-user"></i><span>Мій Профіль</span></a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="stores-section">
+        <div class="stores-header">
+            <h1 class="stores-title">Магазини TechStore</h1>
+
+            <div class="stores-controls">
+                <div class="stores-hotline">
+                    <span class="hotline-caption">Потрібна консультація?</span>
+                    <span class="hotline-text">Телефонуйте на гарячу лінію</span>
+                    <a class="hotline-phone" href="tel:0800217600">0 800 217 600</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="stores-map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.3449324895323!2d30.46769039834141!3d50.44935928619216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce8464859af7%3A0xe85fba111745a6d8!2z0L_RgNC-0YHQvy4g0J_QvtCx0LXQtNGLLCAyNSwg0JrQuNC10LIsIDAyMDAw!5e0!3m2!1sru!2sua!4v1763520612035!5m2!1sru!2sua"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+
+        <div class="stores-table-wrapper">
+            <table class="stores-table">
+                <thead>
+                    <tr>
+                        <th>Місто</th>
+                        <th>Адреса</th>
+                        <th>Час роботи</th>
+                        <th>Доступність</th>
+                        <th>Номер телефону</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Київ</td>
+                        <td>
+                            Магазин "TechStore" (TS001), м. Київ, просп. Перемоги, 25
+                        </td>
+                        <td>Пн–Нд 10:00–20:00</td>
+                        <td>Працюємо, навіть коли немає світла</td>
+                        <td><a href="tel:+380676586404">+38 (067) 658 64 04</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>TechStore</h2>
+            <p>Ваш надійний інтернет-магазин техніки та електроніки. 
+                Ми пропонуємо тільки якісні товари, вигідні ціни та швидку доставку по всій Україні.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Корисні посилання</h3>
+            <ul>
+                <li><a href="#">Про нас</a></li>
+                <li><a href="#">Доставка та оплата</a></li>
+                <li><a href="#">Гарантія та повернення</a></li>
+                <li><a href="contacts.html">Контакти</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contacts">
+            <h3>Контакти</h3>
+            <p><b>Телефон:</b> +38 (050) 123-45-67</p>
+            <p><b>Email:</b> support@techstore.ua</p>
+            <p><b>Адреса:</b> м. Київ, просп. Перемоги, 25</p>
+        </div>
+
+        <div class="footer-social">
+            <h3>Ми у соцмережах</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 TechStore. Всі права захищені.</p>
+    </div>
+</footer>
+
+</body>
+</html>
