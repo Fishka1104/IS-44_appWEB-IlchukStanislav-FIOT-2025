@@ -2194,3 +2194,36 @@ li.menu-item a.menu-link:hover i {
         overflow-y: auto;
     }
 }
+
+
+.product-card .product-desc {
+    font-size: 13px;
+    color: #4b5563;
+    margin: 6px 0 4px;
+    min-height: 32px; /* щоб висота карток була більш однакова */
+}
+
+
+/* Поле пошуку на сторінці категорії */
+.category-toolbar .category-search {
+    margin-left: 10px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 13px;
+    min-width: 220px;
+    background: #f9fafb;
+}
+
+/* Щоб на вузьких екранах усе не ламалося */
+@media screen and (max-width: 700px) {
+    .category-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .category-toolbar .category-search {
+        width: 100%;
+        margin-left: 0;
+    }
+}
