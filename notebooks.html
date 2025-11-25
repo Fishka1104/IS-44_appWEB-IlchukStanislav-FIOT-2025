@@ -106,7 +106,9 @@
     <h1 class="category-title">Ноутбуки, ПК і Планшети</h1>
     <p class="category-subtitle">Ноутбуки для роботи й навчання, ігрові моделі та ультрабуки.</p>
     <div class="category-toolbar">
-      <div class="toolbar-left"><span id="product-count">Товарів: 0</span></div>
+      <div class="toolbar-left">
+        <span id="product-count">Товарів: 0</span>
+      </div>
       <div class="toolbar-right">
         <label for="sort-select">Сортування:</label>
         <select id="sort-select">
@@ -121,20 +123,23 @@
   <div class="category-layout">
     <aside class="filters-panel">
       <h2 class="filters-title"><i class="fas fa-filter"></i> Фільтри</h2>
+
       <div class="filters-group">
         <h3 class="filter-subtitle">Бренд</h3>
         <label><input type="checkbox" name="brand" value="Lenovo"> Lenovo</label>
-<label><input type="checkbox" name="brand" value="HP"> HP</label>
-<label><input type="checkbox" name="brand" value="ASUS"> ASUS</label>
-<label><input type="checkbox" name="brand" value="Acer"> Acer</label>
-<label><input type="checkbox" name="brand" value="Apple"> Apple</label>
+        <label><input type="checkbox" name="brand" value="HP"> HP</label>
+        <label><input type="checkbox" name="brand" value="ASUS"> ASUS</label>
+        <label><input type="checkbox" name="brand" value="Acer"> Acer</label>
+        <label><input type="checkbox" name="brand" value="Apple"> Apple</label>
       </div>
+
       <div class="filters-group">
         <h3 class="filter-subtitle">Тип / призначення</h3>
         <label><input type="checkbox" name="type" value="office"> Для роботи та навчання</label>
-<label><input type="checkbox" name="type" value="gaming"> Ігрові</label>
-<label><input type="checkbox" name="type" value="ultrabook"> Ультрабуки</label>
+        <label><input type="checkbox" name="type" value="gaming"> Ігрові</label>
+        <label><input type="checkbox" name="type" value="ultrabook"> Ультрабуки</label>
       </div>
+
       <div class="filters-group">
         <h3 class="filter-subtitle">Ціна, грн</h3>
         <div class="price-filter-row">
@@ -155,6 +160,7 @@
         </div>
         <form id="product-form" class="admin-form">
           <input type="hidden" id="product-id">
+
           <div class="admin-row">
             <div class="admin-field">
               <label for="product-name">Назва</label>
@@ -162,9 +168,17 @@
             </div>
             <div class="admin-field">
               <label for="product-brand">Бренд</label>
-              <select id="product-brand" required></select>
+              <select id="product-brand" required>
+                <option value="">-- Оберіть бренд --</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="HP">HP</option>
+                <option value="ASUS">ASUS</option>
+                <option value="Acer">Acer</option>
+                <option value="Apple">Apple</option>
+              </select>
             </div>
           </div>
+
           <div class="admin-row">
             <div class="admin-field">
               <label for="product-price">Ціна, грн</label>
@@ -172,9 +186,15 @@
             </div>
             <div class="admin-field">
               <label for="product-type">Призначення / тип</label>
-              <select id="product-type" required></select>
+              <select id="product-type" required>
+                <option value="">-- Оберіть тип --</option>
+                <option value="office">Для роботи та навчання</option>
+                <option value="gaming">Ігровий</option>
+                <option value="ultrabook">Ультрабук</option>
+              </select>
             </div>
           </div>
+
           <div class="admin-row">
             <div class="admin-field">
               <label for="product-image">URL зображення</label>
@@ -185,17 +205,22 @@
               <input type="text" id="product-desc" placeholder="Короткий опис">
             </div>
           </div>
+
           <div class="admin-actions-row">
             <button type="submit" class="filter-btn" id="save-product-btn">Додати товар</button>
-            <button type="button" class="filter-btn secondary" id="cancel-edit-btn" style="display:none;">Скасувати редагування</button>
+            <button type="button" class="filter-btn secondary" id="cancel-edit-btn" style="display:none;">
+              Скасувати редагування
+            </button>
           </div>
         </form>
       </div>
 
+      <!-- Картки товарів -->
       <div id="products-container" class="category-grid"></div>
     </section>
   </div>
 </section>
+
 </main>
 
 <footer class="footer">
@@ -235,5 +260,6 @@
 
 <script src="JS/main.js"></script>
 <script src="JS/catalog-crud.js"></script>
+<script src="JS/models.js"></script>
 </body>
 </html>
