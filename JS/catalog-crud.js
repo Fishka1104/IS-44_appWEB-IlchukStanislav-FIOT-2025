@@ -1,4 +1,7 @@
-// JS/catalog-crud.js
+// JS/catalog-crud.js – версія з REST API (Node.js + MySQL)
+
+// ================== Налаштування API ==================
+const API_BASE_URL = "http://localhost:1105/api/products";
 
 // ================== Конфіг категорій (заголовки, описи) ==================
 const CATEGORY_CONFIG = {
@@ -56,106 +59,36 @@ const CATEGORY_CONFIG = {
   }
 };
 
-// Ключ для localStorage
-const STORAGE_KEY_PREFIX = "ts_products_";
-
-// Початкові (стартові) товари — для прикладу (лише смартфони).
-// Для інших категорій можеш додати свої, або залишити порожньо.
-const SEED_PRODUCTS = {
-  smartphones: [
-    {
-      product_id: 1,
-      name: "iPhone 15 Pro",
-      brand: "Apple",
-      type: "smartphone",
-      price: 45999,
-      image_url: "img/smartphone1.png",
-      short_description: "Флагманський смартфон Apple з потужною камерою."
-    },
-    {
-      product_id: 2,
-      name: "Samsung Galaxy S24",
-      brand: "Samsung",
-      type: "smartphone",
-      price: 39999,
-      image_url: "img/smartphone2.png",
-      short_description: "Топовий Android-смартфон для щоденних задач."
-    },
-    {
-      product_id: 3,
-      name: "Nokia 3310 (2024)",
-      brand: "Nokia",
-      type: "button",
-      price: 1999,
-      image_url: "img/smartphone3.png",
-      short_description: "Надійний кнопковий телефон."
-    }
-  ]
-};
-
 // ================== Стан каталогу ==================
 const state = {
   currentCategory: "smartphones",
-  products: [] // товари поточної категорії
+  products: [],
+  isLoading: false
 };
 
-// ================== Допоміжне: створити Product / об'єкт ==================
-// Якщо ти вже підключив models.js з класом Product — використає його.
-// Якщо ні — буде простий JS-об’єкт, але інтерфейс однаковий.
-// ================== Допоміжне: створити об'єкт товару для каталогу ==================
+// ================== Мапінг з plain-об'єкта з API в фронтовий об'єкт ==================
 function createProductFromPlain(obj) {
-  // Спеціально НЕ використовуємо клас Product з models.js,
-  // щоб не втрачати brand, type та short_description.
   return {
     productId: obj.product_id,
+    categoryId: obj.category_id,
     name: obj.name,
     brand: obj.brand || "",
-    type: obj.type || "",
+    type: obj.product_type || obj.type || "",
     price: Number(obj.price),
+    stockQuantity:
+      obj.stock_quantity !== undefined && obj.stock_quantity !== null
+        ? Number(obj.stock_quantity)
+        : 0,
+    sku: obj.sku || "",
     imageUrl: obj.image_url || "",
     shortDescription: obj.short_description || obj.description || "",
     description: obj.description || ""
   };
 }
 
-
-// ================== Збереження в localStorage ==================
-function loadProducts(categoryKey) {
-  const raw = localStorage.getItem(STORAGE_KEY_PREFIX + categoryKey);
-  if (!raw) {
-    const seed = SEED_PRODUCTS[categoryKey] || [];
-    return seed.map(createProductFromPlain);
-  }
-  try {
-    const arr = JSON.parse(raw);
-    return arr.map(createProductFromPlain);
-  } catch (e) {
-    console.error("Помилка читання localStorage", e);
-    return [];
-  }
-}
-
-function saveProducts(categoryKey, products) {
-  const plain = products.map(p => ({
-    product_id: p.productId,
-    name: p.name,
-    description: p.description || p.shortDescription || "",
-    price: p.price,
-    brand: p.brand || null,
-    type: p.type || null,
-    image_url: p.imageUrl || null,
-    short_description: p.shortDescription || null
-  }));
-
-  localStorage.setItem(
-    STORAGE_KEY_PREFIX + categoryKey,
-    JSON.stringify(plain)
-  );
-}
-
+// ================== DOM-посилання ==================
 let categoryPageEl;
 
-// ================== DOM-посилання ==================
 let categoryTitleEl,
   categorySubtitleEl,
   breadcrumbCurrentEl,
@@ -176,6 +109,8 @@ let productFormEl,
   productTypeEl,
   productImageEl,
   productDescEl,
+  productQtyEl,
+  productSkuEl,
   saveProductBtnEl,
   cancelEditBtnEl;
 
@@ -189,13 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initSearch();
   initForm();
 
-  // стартуємо з тієї категорії, що прочитали з секції
   setCurrentCategory(state.currentCategory);
 });
 
-
 function cacheDom() {
   categoryPageEl = document.querySelector(".category-page");
+
   // якщо на сторінці задано data-category — використовуємо її
   if (categoryPageEl && categoryPageEl.dataset.category) {
     state.currentCategory = categoryPageEl.dataset.category;
@@ -218,6 +152,7 @@ function cacheDom() {
   applyFiltersBtn = document.getElementById("apply-filters");
   resetFiltersBtn = document.getElementById("reset-filters");
   productsContainerEl = document.getElementById("products-container");
+  // пошук — беремо з верхнього хедера
   searchInputEl = document.querySelector(".search-bar");
 
   productFormEl = document.getElementById("product-form");
@@ -228,10 +163,11 @@ function cacheDom() {
   productTypeEl = document.getElementById("product-type");
   productImageEl = document.getElementById("product-image");
   productDescEl = document.getElementById("product-desc");
+  productQtyEl = document.getElementById("product-qty");
+  productSkuEl = document.getElementById("product-sku");
   saveProductBtnEl = document.getElementById("save-product-btn");
   cancelEditBtnEl = document.getElementById("cancel-edit-btn");
 }
-
 
 // ================== Меню категорій ==================
 function initMenu() {
@@ -249,7 +185,6 @@ function initMenu() {
     });
   });
 }
-
 
 // ================== Фільтри, сортування ==================
 function initFiltersAndSort() {
@@ -279,48 +214,55 @@ function initSearch() {
   });
 }
 
-// ================== Форма CRUD ==================
+// ================== Робота з формою (CRUD) ==================
 function initForm() {
   if (!productFormEl) return;
 
-  productFormEl.addEventListener("submit", e => {
+  productFormEl.addEventListener("submit", async e => {
     e.preventDefault();
 
     const idVal = productIdEl.value;
 
     const data = {
-      product_id: idVal ? Number(idVal) : Date.now(), // тимчасовий id
+      // для бекенду: або category_id, або categoryKey
+      categoryKey: state.currentCategory,
       name: productNameEl.value.trim(),
       brand: productBrandEl.value.trim(),
-      type: productTypeEl.value.trim(),
+      product_type: productTypeEl.value.trim(),
+      description: productDescEl.value.trim(),
       price: Number(productPriceEl.value),
-      image_url: productImageEl.value.trim(),
-      short_description: productDescEl.value.trim()
+      stock_quantity: productQtyEl ? Number(productQtyEl.value || 0) : 0,
+      sku: productSkuEl ? productSkuEl.value.trim() : ""
     };
 
-    if (!data.name || !data.brand || !data.type || !data.price) {
+    if (!data.name || !data.brand || !data.product_type || !data.price) {
       alert("Заповни всі обовʼязкові поля (назва, бренд, тип, ціна).");
       return;
     }
 
-    const product = createProductFromPlain(data);
-
-    if (idVal) {
-      // UPDATE
-      const index = state.products.findIndex(
-        p => p.productId === Number(idVal)
-      );
-      if (index !== -1) {
-        state.products[index] = product;
-      }
-    } else {
-      // CREATE
-      state.products.push(product);
+    if (data.price <= 0) {
+      alert("Ціна має бути більшою за нуль.");
+      return;
     }
 
-    saveProducts(state.currentCategory, state.products);
-    resetForm();
-    renderFilteredProducts();
+    if (data.stock_quantity < 0) {
+      alert("Кількість не може бути від’ємною.");
+      return;
+    }
+
+    try {
+      if (idVal) {
+        await updateProductOnServer(Number(idVal), data);
+      } else {
+        await createProductOnServer(data);
+      }
+      resetForm();
+      // після успішного створення/оновлення оновлюємо список товарів
+
+    } catch (err) {
+      console.error("Помилка збереження товару:", err);
+      alert("Не вдалося зберегти товар. Деталі дивись у консолі.");
+    }
   });
 
   if (cancelEditBtnEl) {
@@ -334,14 +276,106 @@ function resetForm() {
   if (!productFormEl) return;
   productFormEl.reset();
   productIdEl.value = "";
+  if (productQtyEl) productQtyEl.value = "";
+  if (productSkuEl) productSkuEl.value = "";
   if (saveProductBtnEl) saveProductBtnEl.textContent = "Додати товар";
   if (cancelEditBtnEl) cancelEditBtnEl.style.display = "none";
 }
 
+// ================== Запити до REST API ==================
+async function fetchProductsForCategory(categoryKey) {
+  if (!productsContainerEl) return;
+
+  state.isLoading = true;
+  productsContainerEl.innerHTML =
+    '<p class="loading-message">Завантаження товарів...</p>';
+
+  try {
+    const params = new URLSearchParams();
+    params.set("categoryKey", categoryKey);
+
+    const res = await fetch(`${API_BASE_URL}?${params.toString()}`);
+    if (!res.ok) {
+      throw new Error(`Помилка HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    state.products = Array.isArray(data)
+      ? data.map(createProductFromPlain)
+      : [];
+  } catch (err) {
+    console.error("Помилка завантаження товарів:", err);
+    state.products = [];
+  } finally {
+    state.isLoading = false;
+    renderFilteredProducts();
+  }
+}
+
+async function createProductOnServer(payload) {
+  const res = await fetch(API_BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(errText || `HTTP ${res.status}`);
+  }
+
+  const created = await res.json();
+  const product = createProductFromPlain(created);
+  state.products.push(product);
+  renderFilteredProducts();
+}
+
+async function updateProductOnServer(productId, payload) {
+  const res = await fetch(`${API_BASE_URL}/${productId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(errText || `HTTP ${res.status}`);
+  }
+
+  const updated = await res.json();
+  const product = createProductFromPlain(updated);
+
+  const index = state.products.findIndex(p => p.productId === productId);
+  if (index !== -1) {
+    state.products[index] = product;
+  } else {
+    state.products.push(product);
+  }
+  renderFilteredProducts();
+}
+
+async function deleteProductFromServer(productId) {
+  const res = await fetch(`${API_BASE_URL}/${productId}`, {
+    method: "DELETE"
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(errText || `HTTP ${res.status}`);
+  }
+
+  // Якщо бекенд повернув success: true – просто видаляємо з локального стейту
+  state.products = state.products.filter(p => p.productId !== productId);
+  renderFilteredProducts();
+}
+
 // ================== Перемикання категорій ==================
-function setCurrentCategory(key) {
+async function setCurrentCategory(key) {
   state.currentCategory = key;
-  state.products = loadProducts(key);
 
   const conf = CATEGORY_CONFIG[key] || {
     title: "Категорія",
@@ -352,7 +386,7 @@ function setCurrentCategory(key) {
   if (categorySubtitleEl) categorySubtitleEl.textContent = conf.subtitle || "";
   if (breadcrumbCurrentEl) breadcrumbCurrentEl.textContent = conf.title;
 
-  // підсвітка активного пункту меню
+  // підсвітка активного пункту меню (для SPA-варіанту, через data-category)
   document.querySelectorAll(".menu-link").forEach(link => {
     if (link.dataset.category === key) {
       link.classList.add("active-category");
@@ -362,7 +396,7 @@ function setCurrentCategory(key) {
   });
 
   resetFilters();
-  renderFilteredProducts();
+  await fetchProductsForCategory(key);
 }
 
 function resetFilters() {
@@ -416,7 +450,8 @@ function getFilteredProducts() {
         p.brand,
         p.type,
         p.shortDescription,
-        p.description
+        p.description,
+        p.sku
       ]
         .filter(Boolean)
         .join(" ")
@@ -446,6 +481,12 @@ function getFilteredProducts() {
 function renderFilteredProducts() {
   if (!productsContainerEl) return;
 
+  if (state.isLoading) {
+    productsContainerEl.innerHTML =
+      '<p class="loading-message">Завантаження товарів...</p>';
+    return;
+  }
+
   const products = getFilteredProducts();
   productsContainerEl.innerHTML = "";
 
@@ -455,7 +496,7 @@ function renderFilteredProducts() {
 
   if (!products.length) {
     productsContainerEl.innerHTML =
-      '<p class="empty-message">Нічого не знайдено. Додай товар через адмін-панель або змінити фільтри.</p>';
+      '<p class="empty-message">Нічого не знайдено. Додай товар через адмін-панель або зміни фільтри.</p>';
     return;
   }
 
@@ -467,7 +508,18 @@ function renderFilteredProducts() {
     const imageUrl =
       product.imageUrl || product.image_url || "img/placeholder.png";
 
-card.innerHTML = `
+    const stockQty =
+      typeof product.stockQuantity === "number" ? product.stockQuantity : 0;
+    const stockText =
+      stockQty > 0
+        ? `В наявності: ${stockQty} шт.`
+        : "Немає в наявності";
+
+    const skuHtml = product.sku
+      ? `<p class="product-sku">Артикул: ${product.sku}</p>`
+      : "";
+
+    card.innerHTML = `
       <div class="card-icons">
         <i class="fas fa-heart"></i>
         <i class="fas fa-balance-scale"></i>
@@ -476,11 +528,13 @@ card.innerHTML = `
       <h3>${product.name}</h3>
       <p class="product-brand">${product.brand || ""}</p>
       <p class="price">${product.price.toLocaleString("uk-UA")} грн</p>
+      <p class="product-stock">${stockText}</p>
       ${
         product.shortDescription
           ? `<p class="product-desc">${product.shortDescription}</p>`
           : ""
       }
+      ${skuHtml}
       <button class="buy-btn">Купити</button>
       <div class="card-admin-actions">
         <button class="edit-btn">Редагувати</button>
@@ -495,7 +549,7 @@ card.innerHTML = `
       startEditProduct(product.productId)
     );
     deleteBtn.addEventListener("click", () =>
-      deleteProduct(product.productId)
+      handleDeleteProduct(product.productId)
     );
 
     productsContainerEl.appendChild(card);
@@ -515,16 +569,24 @@ function startEditProduct(productId) {
   productImageEl.value = product.imageUrl || product.image_url || "";
   productDescEl.value =
     product.shortDescription || product.description || "";
+  if (productQtyEl)
+    productQtyEl.value =
+      product.stockQuantity !== undefined && product.stockQuantity !== null
+        ? product.stockQuantity
+        : 0;
+  if (productSkuEl) productSkuEl.value = product.sku || "";
 
   if (saveProductBtnEl) saveProductBtnEl.textContent = "Оновити товар";
   if (cancelEditBtnEl) cancelEditBtnEl.style.display = "inline-block";
   productNameEl.focus();
 }
 
-function deleteProduct(productId) {
+async function handleDeleteProduct(productId) {
   if (!confirm("Видалити цей товар?")) return;
-
-  state.products = state.products.filter(p => p.productId !== productId);
-  saveProducts(state.currentCategory, state.products);
-  renderFilteredProducts();
+  try {
+    await deleteProductFromServer(productId);
+  } catch (err) {
+    console.error("Помилка видалення товару:", err);
+    alert("Не вдалося видалити товар. Деталі дивись у консолі.");
+  }
 }

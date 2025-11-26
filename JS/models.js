@@ -1,5 +1,3 @@
-// JS/models.js
-
 // === Role (Roles) ===
 class Role {
     constructor({ role_id = null, role_name }) {

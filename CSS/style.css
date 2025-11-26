@@ -2227,3 +2227,23 @@ li.menu-item a.menu-link:hover i {
         margin-left: 0;
     }
 }
+
+
+.product-card .product-desc {
+    font-size: 13px;
+    color: #4b5563;
+    margin: 6px 0 4px;
+    min-height: 32px;
+}
+
+
+.product-card .product-stock,
+.product-card .product-sku {
+    font-size: 12px;
+    color: #4b5563;
+    margin: 2px 0;
+}
+
+.product-card .product-stock {
+    color: #059669; /* трохи виділити "в наявності" */
+}
