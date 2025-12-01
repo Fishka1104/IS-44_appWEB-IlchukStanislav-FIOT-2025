@@ -1,7 +1,12 @@
-// JS/catalog-crud.js – версія з REST API (Node.js + MySQL)
+// JS/catalog-crud.js – версія з REST API (Node.js + MySQL) + роль Admin
+// :contentReference[oaicite:0]{index=0}
 
 // ================== Налаштування API ==================
 const API_BASE_URL = "http://localhost:1105/api/products";
+const AUTH_TOKEN_KEY = "authToken";
+const CURRENT_USER_KEY = "currentUser";
+
+let isAdmin = false;
 
 // ================== Конфіг категорій (заголовки, описи) ==================
 const CATEGORY_CONFIG = {
@@ -86,6 +91,35 @@ function createProductFromPlain(obj) {
   };
 }
 
+// ================== Допоміжні: роль Admin + заголовки авторизації ==================
+function detectAdminFromStorage() {
+  try {
+    const raw = localStorage.getItem(CURRENT_USER_KEY);
+    if (!raw) return;
+    const user = JSON.parse(raw);
+    if (user && Array.isArray(user.roles)) {
+      isAdmin = user.roles.includes("Admin");
+    } else {
+      isAdmin = false;
+    }
+  } catch (e) {
+    console.error("Помилка читання currentUser з localStorage:", e);
+    isAdmin = false;
+  }
+}
+
+function buildAuthHeaders(isJson = true) {
+  const headers = {};
+  if (isJson) {
+    headers["Content-Type"] = "application/json";
+  }
+  const token = localStorage.getItem(AUTH_TOKEN_KEY);
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+  return headers;
+}
+
 // ================== DOM-посилання ==================
 let categoryPageEl;
 
@@ -118,11 +152,22 @@ let currentSearch = "";
 
 // ================== Ініціалізація ==================
 document.addEventListener("DOMContentLoaded", () => {
+  // 1. Визначаємо, чи поточний користувач адмін
+  detectAdminFromStorage();
+
+  // 2. Кешуємо DOM
   cacheDom();
+
+  // 3. Ховаємо адмін-панель, якщо не Admin
+  applyAdminVisibility();
+
   initMenu();
   initFiltersAndSort();
   initSearch();
-  initForm();
+
+  if (isAdmin) {
+    initForm();
+  }
 
   setCurrentCategory(state.currentCategory);
 });
@@ -167,6 +212,13 @@ function cacheDom() {
   productSkuEl = document.getElementById("product-sku");
   saveProductBtnEl = document.getElementById("save-product-btn");
   cancelEditBtnEl = document.getElementById("cancel-edit-btn");
+}
+
+function applyAdminVisibility() {
+  const adminPanel = document.querySelector(".admin-panel");
+  if (!isAdmin && adminPanel) {
+    adminPanel.style.display = "none";
+  }
 }
 
 // ================== Меню категорій ==================
@@ -221,6 +273,11 @@ function initForm() {
   productFormEl.addEventListener("submit", async e => {
     e.preventDefault();
 
+    if (!isAdmin) {
+      alert("Тільки адміністратор може змінювати товари.");
+      return;
+    }
+
     const idVal = productIdEl.value;
 
     const data = {
@@ -257,8 +314,6 @@ function initForm() {
         await createProductOnServer(data);
       }
       resetForm();
-      // після успішного створення/оновлення оновлюємо список товарів
-
     } catch (err) {
       console.error("Помилка збереження товару:", err);
       alert("Не вдалося зберегти товар. Деталі дивись у консолі.");
@@ -315,9 +370,7 @@ async function fetchProductsForCategory(categoryKey) {
 async function createProductOnServer(payload) {
   const res = await fetch(API_BASE_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: buildAuthHeaders(true),
     body: JSON.stringify(payload)
   });
 
@@ -335,9 +388,7 @@ async function createProductOnServer(payload) {
 async function updateProductOnServer(productId, payload) {
   const res = await fetch(`${API_BASE_URL}/${productId}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: buildAuthHeaders(true),
     body: JSON.stringify(payload)
   });
 
@@ -360,7 +411,8 @@ async function updateProductOnServer(productId, payload) {
 
 async function deleteProductFromServer(productId) {
   const res = await fetch(`${API_BASE_URL}/${productId}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: buildAuthHeaders(false)
   });
 
   if (!res.ok) {
@@ -368,7 +420,6 @@ async function deleteProductFromServer(productId) {
     throw new Error(errText || `HTTP ${res.status}`);
   }
 
-  // Якщо бекенд повернув success: true – просто видаляємо з локального стейту
   state.products = state.products.filter(p => p.productId !== productId);
   renderFilteredProducts();
 }
@@ -496,7 +547,7 @@ function renderFilteredProducts() {
 
   if (!products.length) {
     productsContainerEl.innerHTML =
-      '<p class="empty-message">Нічого не знайдено. Додай товар через адмін-панель або зміни фільтри.</p>';
+      '<p class="empty-message">Нічого не знайдено. Додай товар через адмін-панель або змінити фільтри.</p>';
     return;
   }
 
@@ -519,6 +570,15 @@ function renderFilteredProducts() {
       ? `<p class="product-sku">Артикул: ${product.sku}</p>`
       : "";
 
+    const adminButtonsHtml = isAdmin
+      ? `
+        <div class="card-admin-actions">
+          <button class="edit-btn">Редагувати</button>
+          <button class="delete-btn">Видалити</button>
+        </div>
+      `
+      : "";
+
     card.innerHTML = `
       <div class="card-icons">
         <i class="fas fa-heart"></i>
@@ -536,21 +596,24 @@ function renderFilteredProducts() {
       }
       ${skuHtml}
       <button class="buy-btn">Купити</button>
-      <div class="card-admin-actions">
-        <button class="edit-btn">Редагувати</button>
-        <button class="delete-btn">Видалити</button>
-      </div>
+      ${adminButtonsHtml}
     `;
 
-    const editBtn = card.querySelector(".edit-btn");
-    const deleteBtn = card.querySelector(".delete-btn");
+    if (isAdmin) {
+      const editBtn = card.querySelector(".edit-btn");
+      const deleteBtn = card.querySelector(".delete-btn");
 
-    editBtn.addEventListener("click", () =>
-      startEditProduct(product.productId)
-    );
-    deleteBtn.addEventListener("click", () =>
-      handleDeleteProduct(product.productId)
-    );
+      if (editBtn) {
+        editBtn.addEventListener("click", () =>
+          startEditProduct(product.productId)
+        );
+      }
+      if (deleteBtn) {
+        deleteBtn.addEventListener("click", () =>
+          handleDeleteProduct(product.productId)
+        );
+      }
+    }
 
     productsContainerEl.appendChild(card);
   });
@@ -558,6 +621,11 @@ function renderFilteredProducts() {
 
 // ================== Редагування / Видалення ==================
 function startEditProduct(productId) {
+  if (!isAdmin) {
+    alert("Тільки адміністратор може редагувати товари.");
+    return;
+  }
+
   const product = state.products.find(p => p.productId === productId);
   if (!product) return;
 
@@ -582,6 +650,10 @@ function startEditProduct(productId) {
 }
 
 async function handleDeleteProduct(productId) {
+  if (!isAdmin) {
+    alert("Тільки адміністратор може видаляти товари.");
+    return;
+  }
   if (!confirm("Видалити цей товар?")) return;
   try {
     await deleteProductFromServer(productId);
