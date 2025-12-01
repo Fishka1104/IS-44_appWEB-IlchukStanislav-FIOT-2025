@@ -2247,3 +2247,45 @@ li.menu-item a.menu-link:hover i {
 .product-card .product-stock {
     color: #059669; /* трохи виділити "в наявності" */
 }
+
+
+/* ====== Профіль: стилі для полів редагування ====== */
+
+.profile-card .profile-grid input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #2d3748;
+    background-color: #f7fafc;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.profile-card .profile-grid input::placeholder {
+    color: #a0aec0;
+    font-size: 13px;
+}
+
+.profile-card .profile-grid input:focus {
+    background-color: #ffffff;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 1px rgba(74, 144, 226, 0.25);
+}
+
+/* Кнопки під формою редагування */
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+/* На вузьких екранах – одна колонка замість трьох */
+@media screen and (max-width: 900px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}

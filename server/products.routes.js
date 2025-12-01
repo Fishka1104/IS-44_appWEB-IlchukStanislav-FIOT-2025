@@ -1,9 +1,10 @@
+// server/products.routes.js
 const express = require("express");
 const router = express.Router();
 const pool = require("./db");
+const { authRequired, requireRole } = require("./auth.middleware");
 
 // Мапа "ключ категорії на фронті" -> category_id в БД
-// ПІДРЕДАГУЙ під свої реальні ID з таблиці Categories
 const CATEGORY_KEY_TO_ID = {
   smartphones: 1,
   tv: 2,
@@ -151,8 +152,8 @@ router.get("/:id", async (req, res) => {
 });
 
 // ================== POST /api/products ==================
-// Створити новий товар
-router.post("/", async (req, res) => {
+// Створити новий товар (тільки Admin)
+router.post("/", authRequired, requireRole("Admin"), async (req, res) => {
   try {
     const {
       category_id,
@@ -201,7 +202,16 @@ router.post("/", async (req, res) => {
         (category_id, name, brand, product_type, description, price, stock_quantity, sku)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `,
-      [catId, name, brand || null, product_type || null, description || null, numericPrice, stockQty, sku || null]
+      [
+        catId,
+        name,
+        brand || null,
+        product_type || null,
+        description || null,
+        numericPrice,
+        stockQty,
+        sku || null
+      ]
     );
 
     const insertedId = result.insertId;
@@ -238,8 +248,8 @@ router.post("/", async (req, res) => {
 });
 
 // ================== PUT /api/products/:id ==================
-// Оновити товар (повна/часткова заміна полів)
-router.put("/:id", async (req, res) => {
+// Оновити товар (повна/часткова заміна полів) — тільки Admin
+router.put("/:id", authRequired, requireRole("Admin"), async (req, res) => {
   try {
     const id = Number(req.params.id);
     const {
@@ -354,7 +364,8 @@ router.put("/:id", async (req, res) => {
 });
 
 // ================== DELETE /api/products/:id ==================
-router.delete("/:id", async (req, res) => {
+// Видалити товар — тільки Admin
+router.delete("/:id", authRequired, requireRole("Admin"), async (req, res) => {
   try {
     const id = Number(req.params.id);
 

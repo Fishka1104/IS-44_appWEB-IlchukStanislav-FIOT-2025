@@ -153,3 +153,24 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ===== Повідомлення про помилки в формі (логін/реєстрація) ===== */
+.auth-error {
+    display: none;              /* за замовчуванням приховане, показуємо через JS */
+    margin-bottom: 15px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background-color: rgba(239, 68, 68, 0.12); /* мʼякий червоний фон */
+    border: 1px solid #ef4444;
+    color: #fecaca;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/*  "успішно" (на майбутнє) */
+.auth-error.success {
+    background-color: rgba(22, 163, 74, 0.15);
+    border-color: #16a34a;
+    color: #bbf7d0;
+}

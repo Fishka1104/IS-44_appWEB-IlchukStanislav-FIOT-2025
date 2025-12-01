@@ -2,23 +2,26 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const productsRouter = require("./products.routes");
+const authRouter = require("./auth.routes");
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 1105;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Глобальні middleware
+app.use(cors());          // Дозволяє CORS-запити з фронтенду
+app.use(express.json());  // Дозволяє приймати JSON у тілі запитів
 
-// Простий ping
+// Простий маршрут-перевірка
 app.get("/", (req, res) => {
   res.send("TechStore API is running");
 });
 
 // REST для товарів
 app.use("/api/products", productsRouter);
+
+app.use("/api/auth", authRouter);
 
 // 404 для невідомих маршрутів
 app.use((req, res) => {
@@ -29,3 +32,4 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`TechStore API listening on http://localhost:${PORT}`);
 });
+

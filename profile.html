@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
-    <link rel="stylesheet" href="img">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 
@@ -16,7 +15,8 @@
         <div class="header-top">
             <nav class="nav">
                 <div>
-                <a class="logo" href="techStore.html">TechStore</a>
+                    <!-- ТУТ МИ ЗМІНИЛИ techStore.html -> index.html -->
+                    <a class="logo" href="index.html">TechStore</a>
                 </div>
                 <ul class="nav-links">
                     <li><a class="div-a" href="#">Магазин</a></li>
@@ -42,100 +42,126 @@
         <div class="cabinet-container">
             <h1 class="cabinet-title">Особистий кабінет</h1>
             <div class="cabinet-layout">
-            
+
                 <nav class="cabinet-nav">
                     <ul>
-                        <li class="active"><a href="#"><i class="fas fa-user"></i> Мій профіль</a></li>
-                        <li><a href="#"><i class="fas fa-box"></i> Мої замовлення</a></li>
-                        <li><a href="#"><i class="fas fa-heart"></i> Мої бажання</a></li>
-                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Вийти</a></li>
+                        <li class="active">
+                            <a href="#"><i class="fas fa-user"></i> Мій профіль</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-box"></i> Мої замовлення</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-heart"></i> Мої бажання</a>
+                        </li>
+                        <li>
+                            <!-- ВАЖЛИВО: цей id використовується у profile.js -->
+                            <a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Вийти</a>
+                        </li>
                     </ul>
                 </nav>
 
                 <div class="cabinet-content">
                     <h2 class="content-title">Мій профіль</h2>
                     <div class="profile-card">
-                        <div class="profile-grid">
-                        
+                        <!-- Режим перегляду -->
+                        <div class="profile-grid" id="profile-view">
                             <div class="detail-item">
                                 <label>Ім'я</label>
-                                <span class="value"></span>
+                                <span class="value" id="profile-first-name"></span>
                             </div>
                             <div class="detail-item">
                                 <label>Прізвище</label>
-                                <span class="value"></span>
+                                <span class="value" id="profile-last-name"></span>
                             </div>
-                            <div class="detail-item">
-                                <label>По батькові</label>
-                                <span class="value"></span> 
-                            </div>
-
                             <div class="detail-item">
                                 <label>Телефон</label>
-                                <span class="value"></span>
+                                <span class="value" id="profile-phone"></span>
                             </div>
                             <div class="detail-item">
                                 <label>Email</label>
-                                <span class="value"></span>
+                                <span class="value" id="profile-email"></span>
                             </div>
                             <div class="detail-item">
-                                <label>Місто</label>
-                                <span class="value"></span>
-                            </div>
-                        
-                            <div class="detail-item">
-                                <label>Стать</label>
-                                <span class="value"></span>
+                                <label>Дата реєстрації</label>
+                                <span class="value" id="profile-created-at"></span>
                             </div>
                         </div>
-                        <button class="edit-btn">Редагувати</button>
+
+                        <!-- Режим редагування -->
+                        <form class="profile-grid" id="profile-edit-form" style="display:none;">
+                            <div class="detail-item">
+                                <label for="edit-first-name">Ім'я</label>
+                                <input type="text" id="edit-first-name">
+                            </div>
+                            <div class="detail-item">
+                                <label for="edit-last-name">Прізвище</label>
+                                <input type="text" id="edit-last-name">
+                            </div>
+                            <div class="detail-item">
+                                <label for="edit-phone">Телефон</label>
+                                <input type="text" id="edit-phone" placeholder="+38 (0__) ___-__-__">
+                            </div>
+                            <div class="detail-item">
+                                <label for="edit-email">Email</label>
+                                <input type="email" id="edit-email">
+                            </div>
+                        </form>
+
+                        <div class="profile-actions">
+                            <button class="edit-btn" id="profile-edit-btn">Редагувати</button>
+                            <button class="edit-btn" id="profile-save-btn" style="display:none;">Зберегти</button>
+                            <button class="edit-btn" id="profile-cancel-btn" style="display:none;">Скасувати</button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="footer-container">
-            
-                <div class="footer-about">
-                    <h2>TechStore</h2>
-                    <p>Ваш надійний інтернет-магазин техніки та електроніки. 
+
+            <div class="footer-about">
+                <h2>TechStore</h2>
+                <p>Ваш надійний інтернет-магазин техніки та електроніки. 
                     Ми пропонуємо тільки якісні товари, вигідні ціни та швидку доставку по всій Україні.</p>
-                </div>
+            </div>
 
-                <div class="footer-links">
-                    <h3>Корисні посилання</h3>
-                    <ul>
-                        <li><a href="#">Про нас</a></li>
-                        <li><a href="#">Доставка та оплата</a></li>
-                        <li><a href="#">Гарантія та повернення</a></li>
-                        <li><a href="#">Контакти</a></li>
-                    </ul>
-                </div>
+            <div class="footer-links">
+                <h3>Корисні посилання</h3>
+                <ul>
+                    <li><a href="#">Про нас</a></li>
+                    <li><a href="#">Доставка та оплата</a></li>
+                    <li><a href="#">Гарантія та повернення</a></li>
+                    <li><a href="#">Контакти</a></li>
+                </ul>
+            </div>
 
-                <div class="footer-contacts">
-                    <h3>Контакти</h3>
-                    <p><b>Телефон:</b> +38 (050) 123-45-67</p>
-                    <p><b>Email:</b> support@techstore.ua</p>
-                    <p><b>Адреса:</b> м. Київ, просп. Перемоги, 25</p>
-                </div>
+            <div class="footer-contacts">
+                <h3>Контакти</h3>
+                <p><b>Телефон:</b> +38 (050) 123-45-67</p>
+                <p><b>Email:</b> support@techstore.ua</p>
+                <p><b>Адреса:</b> м. Київ, просп. Перемоги, 25</p>
+            </div>
 
-                <div class="footer-social">
-                    <h3>Ми у соцмережах</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                    </div>
+            <div class="footer-social">
+                <h3>Ми у соцмережах</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
                 </div>
+            </div>
         </div>
 
-            <div class="footer-bottom">
-                <p>© 2025 TechStore. Всі права захищені.</p>
-            </div>
+        <div class="footer-bottom">
+            <p>© 2025 TechStore. Всі права захищені.</p>
+        </div>
     </footer>
 
+    <script src="JS/profile.js"></script>
 </body>
 </html>
