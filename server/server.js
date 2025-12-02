@@ -3,7 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const productsRouter = require("./products.routes");
 const authRouter = require("./auth.routes");
-
+const adminRouter = require("./admin.routes");
 dotenv.config();
 
 const app = express();
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // REST для товарів
 app.use("/api/products", productsRouter);
-
+app.use("/api/admin", adminRouter);
 app.use("/api/auth", authRouter);
 
 // 404 для невідомих маршрутів

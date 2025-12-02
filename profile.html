@@ -55,8 +55,12 @@
                             <a href="#"><i class="fas fa-heart"></i> Мої бажання</a>
                         </li>
                         <li>
-                            <!-- ВАЖЛИВО: цей id використовується у profile.js -->
                             <a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Вийти</a>
+                        </li>
+                        <li id="admin-panel-link" style="display:none;">
+                            <a href="admin.html">
+                            <i class="fas fa-shield-alt"></i> Адмін-панель
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -161,6 +165,36 @@
             <p>© 2025 TechStore. Всі права захищені.</p>
         </div>
     </footer>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const adminItem = document.getElementById("admin-panel-link");
+    if (!adminItem) return;
+
+    const raw = localStorage.getItem("currentUser");
+    if (!raw) return; // не залогінений – нічого не показуємо
+
+    try {
+      const user = JSON.parse(raw);
+
+      // roles може бути масивом рядків ["Admin","Client"]
+      // або масивом обʼєктів { name: "Admin", ... } – на всяк випадок обробляємо обидва варіанти
+      let roles = user.roles || [];
+
+      if (roles.length && typeof roles[0] === "object") {
+        roles = roles.map(r => r.name);
+      }
+
+      if (roles.includes("Admin")) {
+        // показуємо пункт у меню
+        adminItem.style.display = "list-item";
+      }
+    } catch (e) {
+      console.error("Помилка розбору currentUser з localStorage:", e);
+    }
+  });
+</script>
+
 
     <script src="JS/profile.js"></script>
 </body>
