@@ -2289,3 +2289,164 @@ li.menu-item a.menu-link:hover i {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ===== Admin-панель: управління користувачами ===== */
+
+.admin-page {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f3f4f6;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+}
+
+.admin-header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: #1f2937;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.admin-header p {
+    margin: 0 0 20px;
+    color: #6b7280;
+}
+
+.admin-users-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+
+.admin-users-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.admin-users-toolbar span {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.admin-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.admin-table thead {
+    background: #f3f4f6;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: #374151;
+}
+
+.admin-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.admin-loading,
+.admin-empty {
+    text-align: center;
+    padding: 10px;
+    color: #6b7280;
+}
+
+.admin-error {
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background-color: rgba(239, 68, 68, 0.08);
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+    font-size: 13px;
+}
+
+/* Кнопки в admin-панелі */
+
+.admin-btn {
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.admin-btn.secondary {
+    background: #ffffff;
+    color: #2563eb;
+}
+
+.admin-btn.danger {
+    border-color: #dc2626;
+    background: #dc2626;
+}
+
+.admin-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.admin-note {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Бейджі ролей */
+
+.badge-role {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.badge-admin {
+    background: rgba(37, 99, 235, 0.12);
+    color: #1d4ed8;
+}
+
+.badge-client {
+    background: rgba(16, 185, 129, 0.12);
+    color: #047857;
+}
+
+.badge-empty {
+    background: rgba(156, 163, 175, 0.15);
+    color: #4b5563;
+}
+
+@media (max-width: 768px) {
+    .admin-users-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
